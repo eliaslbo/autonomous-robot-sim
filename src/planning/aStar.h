@@ -9,12 +9,16 @@ struct Node {
     int g;
     int h;
     int f;
+
+    bool operator>(const Node& other) const {
+        return f > other.f;
+    }
 };
 
 class Astar {
     public:
         Astar(const Maze& maze);
-        std::vector<std::pair<int,int>> findPath(std::pair<int,int> start, std::pair<int,int> goal) const;
+        std::vector<std::pair<int,int>> findPath(std::pair<int,int> start, std::pair<int,int> goal) ;
     private:
         const Maze& maze;
 };
