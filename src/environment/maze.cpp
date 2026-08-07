@@ -23,8 +23,8 @@ void Maze::printMaze(){
     }
 }
 
-bool Maze::isWall(int x, int y){
-    return grid[x][y] == 1;
+bool Maze::isWall(int y, int x) const {
+    return grid[y][x] == 1;
 }
 
 void Maze::generate(){

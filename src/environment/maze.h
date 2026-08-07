@@ -5,7 +5,7 @@ class Maze {
     public:
         Maze(int height, int width);
         void printMaze();
-        bool isWall(int x, int y);
+        bool isWall(int y, int x) const;
         void generate();
     private:
         std::vector<std::vector<int>> grid;

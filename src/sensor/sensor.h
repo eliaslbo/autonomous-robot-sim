@@ -1,6 +1,6 @@
 #pragma once
 #include <vector>
-#include "maze.h"
+#include "../environment/maze.h"
 
 struct SensorReading {
     int up;
@@ -9,10 +9,13 @@ struct SensorReading {
     int right;
 };
 
+
 class Sensor {
     public:
         Sensor(const Maze& maze);
-        SensorReading measure(int x, int y);
+        SensorReading measure(int y, int x);
     private:
         const Maze& maze;
+        int openCellCounter(int y, int x, int dy, int dx, int dirCount);
 };  
+

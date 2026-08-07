@@ -7,4 +7,5 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 add_executable(robot_sim
     src/main.cpp
     src/environment/maze.cpp
+    src/sensor/sensor.cpp
 )
