@@ -11,4 +11,7 @@ add_executable(robot_sim
     src/planning/aStar.cpp
     src/robot/robot.cpp
     src/control/controlLoop.cpp
+    src/network/socket.cpp
 )
+
+target_link_libraries(robot_sim ws2_32)

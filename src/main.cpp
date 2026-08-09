@@ -4,16 +4,17 @@
 #include "planning/aStar.h"
 #include "robot/robot.h"
 #include "control/controlLoop.h"
+#include "network/socket.h"
 
 
 int main() {
-    Maze maze(21,21);
+    Maze maze(41,41);
     maze.generate();
     
-    Robot robot(maze, {1,1}, {19,19});
+    Robot robot(maze, {1,1}, {39,39});
     robot.initialize();
 
-    ControlLoop controlLoop(robot, 100);
+    ControlLoop controlLoop(robot, maze, 50, "127.0.0.1", 65432);
     controlLoop.start();
     controlLoop.wait();
 

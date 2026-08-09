@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <string>
 
 class Maze {
     public:
@@ -8,6 +9,7 @@ class Maze {
         bool isWall(int y, int x) const;
         void generate();
         void printPath(const std::vector<std::pair<int,int>>& path) const;
+        std::string toString() const;
     private:
         std::vector<std::vector<int>> grid;
         int width;

@@ -4,6 +4,7 @@
 #include "../planning/aStar.h"
 #include <vector>
 #include <utility>
+#include <string>
 
 class Robot{
     public:
@@ -13,6 +14,7 @@ class Robot{
         void move();
         bool hasReachedGoal();
         std::vector<std::pair<int,int>> getPath();
+        std::string positionToString() const;
 
     private:
         const Maze& maze;
