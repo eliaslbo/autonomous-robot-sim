@@ -7,6 +7,7 @@ class Maze {
         void printMaze();
         bool isWall(int y, int x) const;
         void generate();
+        void printPath(const std::vector<std::pair<int,int>>& path) const;
     private:
         std::vector<std::vector<int>> grid;
         int width;

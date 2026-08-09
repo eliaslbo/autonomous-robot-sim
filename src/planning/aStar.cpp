@@ -13,6 +13,7 @@ std::vector<std::pair<int,int>> Astar::findPath(std::pair<int,int> start, std::p
     std::priority_queue<Node, std::vector<Node>, std::greater<Node>> openList;
     std::vector<std::pair<int,int>> closedList;
     std::vector<Node> visitedNodes;
+    std::vector<std::pair<int,int>> path;
 
     Node startNode;
     startNode.position = start;
@@ -30,10 +31,22 @@ std::vector<std::pair<int,int>> Astar::findPath(std::pair<int,int> start, std::p
         openList.pop();
 
         if (current.position == goal){
-            //Do this later
+            while(current.parent != current.position){
+                path.push_back(current.position);
+                for (int i = 0; i < visitedNodes.size(); i++){
+                    if (visitedNodes[i].position == current.parent){
+                        current = visitedNodes[i];
+                        break;
+                    }
+                }
+            }
+            path.push_back(current.position);
+            std::reverse(path.begin(), path.end());
+            return path;
         }
 
         closedList.push_back(current.position);
+        visitedNodes.push_back(current);
 
         for (std::pair<int,int> dir : directions){
             int dy = dir.first;
@@ -56,6 +69,6 @@ std::vector<std::pair<int,int>> Astar::findPath(std::pair<int,int> start, std::p
                 openList.push(neighbour);
             }
         }
-        
     }
+    return path;
 }
