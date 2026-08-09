@@ -68,3 +68,20 @@ void Maze::carve(int x, int y){
         }
     }
 }
+
+std::string Maze::toString() const {
+    std::string result = "MAZE:" + std::to_string(height) + "," + std::to_string(width) + ",";
+    for (int i = 0; i < height; i++){
+        for (int j = 0; j < width; j++){
+            if (i+1 == height && j+1 == width){
+                result += std::to_string(grid[i][j]);
+            } else{
+                result += std::to_string(grid[i][j]) + ",";
+            }
+        }
+        if (i+1 != height){
+            result += "|";
+        }
+    }
+    return result;
+}
