@@ -3,6 +3,7 @@
 #include "sensor/sensor.h"
 #include "planning/aStar.h"
 #include "robot/robot.h"
+#include "control/controlLoop.h"
 
 
 int main() {
@@ -11,13 +12,12 @@ int main() {
     
     Robot robot(maze, {1,1}, {19,19});
     robot.initialize();
-    while (!robot.hasReachedGoal()){
-        robot.move();
-        std::cout << "(" << robot.getPosition().first << ", " << robot.getPosition().second << ")" << std::endl;
-    }
-  
-    std::vector<std::pair<int,int>> path = robot.getPath();
-    maze.printPath(path);
+
+    ControlLoop controlLoop(robot, 100);
+    controlLoop.start();
+    controlLoop.wait();
+
+    maze.printPath(robot.getPath());
 
     return 0;
 }
