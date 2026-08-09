@@ -23,6 +23,22 @@ void Maze::printMaze(){
     }
 }
 
+void Maze::printPath(const std::vector<std::pair<int,int>>& path) const {
+    for (int i = 0; i < height; i++){
+        for (int j = 0; j < width; j++){
+            std::pair<int,int> cell = {i, j};
+            if (grid[i][j] == 1){
+                std::cout << "*";
+            } else if (find(path.begin(), path.end(), cell) != path.end()) {
+                std::cout << ".";
+            } else {
+                std::cout << " ";
+            }
+        }
+        std::cout << std::endl;
+    }
+}
+
 bool Maze::isWall(int y, int x) const {
     return grid[y][x] == 1;
 }
