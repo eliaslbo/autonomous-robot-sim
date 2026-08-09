@@ -10,4 +10,5 @@ add_executable(robot_sim
     src/sensor/sensor.cpp
     src/planning/aStar.cpp
     src/robot/robot.cpp
+    src/control/controlLoop.cpp
 )
