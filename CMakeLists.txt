@@ -9,4 +9,5 @@ add_executable(robot_sim
     src/environment/maze.cpp
     src/sensor/sensor.cpp
     src/planning/aStar.cpp
+    src/robot/robot.cpp
 )
