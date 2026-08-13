@@ -2,9 +2,11 @@
 #include <vector>
 
 
-Sensor::Sensor(const Maze& maze) : maze(maze) {
+Sensor::Sensor(const Maze& maze, std::pair<int,int> startPos)
+    : maze(maze), discoveredMap(maze.getHeight(), maze.getWidth(), startPos) {
 
 }
+
 
 int Sensor::openCellCounter(int y, int x, int dy, int dx, int dirCount){
     int new_y = y + dy;
@@ -38,3 +40,38 @@ SensorReading Sensor::measure(int y, int x){
     }
     return readings;
 }
+
+void Sensor::updateMap(std::pair<int,int> pos){
+    int y = pos.first;
+    int x = pos.second;
+    SensorReading readings = measure(pos.first, pos.second);
+    std::vector<int> readingsVec = {readings.up, readings.down, readings.left, readings.right};
+    std::vector<std::pair<int,int>> directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+    int direction = 0;
+    for (int dir : readingsVec){
+        if (dir == 0) {
+            int wallY = y + directions[direction].first;
+            int wallX = x + directions[direction].second;
+            if (wallY >= 0 && wallX >= 0 && wallY < discoveredMap.getHeight() && wallX < discoveredMap.getWidth()) {
+                discoveredMap.addToMap({wallY, wallX}, 1);
+            }
+        direction++;
+        continue;
+        }
+        for (int i = 0; i < dir ; i++){
+            if (i == dir - 1){
+                discoveredMap.addToMap({y + directions[direction].first * (i+1), x + directions[direction].second * (i+1)}, 0);
+                int wallY = y + directions[direction].first * (dir + 1);
+                int wallX = x + directions[direction].second * (dir + 1);
+                if (wallY >= 0 && wallX >= 0 && wallY < discoveredMap.getHeight() && wallX < discoveredMap.getWidth()) {
+                    discoveredMap.addToMap({wallY, wallX}, 1);
+                }
+            }else{
+                discoveredMap.addToMap({y + directions[direction].first * (i+1), x + directions[direction].second * (i+1)}, 0);
+            }
+        }
+        direction++;
+    }
+}
+
+const DiscoveredMap& Sensor::getDiscoveredMap() const {return discoveredMap;}
