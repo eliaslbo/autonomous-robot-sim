@@ -85,3 +85,12 @@ std::string Maze::toString() const {
     }
     return result;
 }
+
+int Maze::getHight() const{
+    return height;
+}
+        
+
+int Maze::getWidth() const{
+    return width;
+}
