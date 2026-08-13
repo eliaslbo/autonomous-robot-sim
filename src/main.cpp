@@ -14,7 +14,7 @@ int main() {
     Robot robot(maze, {1,1}, {39,39});
     robot.initialize();
 
-    ControlLoop controlLoop(robot, maze, 50, "127.0.0.1", 65432);
+    ControlLoop controlLoop(robot, maze, 25, "127.0.0.1", 65432);
     controlLoop.start();
     controlLoop.wait();
 
