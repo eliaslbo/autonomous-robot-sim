@@ -10,6 +10,8 @@ class Maze {
         void generate();
         void printPath(const std::vector<std::pair<int,int>>& path) const;
         std::string toString() const;
+        int getHeight() const;
+        int getWidth() const;
     private:
         std::vector<std::vector<int>> grid;
         int width;
